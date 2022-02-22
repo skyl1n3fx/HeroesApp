@@ -10,24 +10,36 @@ import { environment } from '../../../environments/environment';
 })
 export class HeroesService {
 
-  private baseUrl :string = environment.baseUrl;
+  private baseUrl: string = environment.baseUrl;
 
-  constructor(private http : HttpClient){ }
+  constructor(private http: HttpClient) { }
 
-  getHeroes() : Observable<Heroe[]>{
+  getHeroes(): Observable<Heroe[]> {
     return this.http.get<Heroe[]>(`${this.baseUrl}/heroes`);
   }
 
-  getHeroeFindId(id:string):Observable<Heroe>{
+  getHeroeFindId(id: string): Observable<Heroe> {
     return this.http.get<Heroe>(`${this.baseUrl}/heroes/${id}`);
   }
 
-  getSugerencias(termino :string):Observable<Heroe[]>{
+  getSugerencias(termino: string): Observable<Heroe[]> {
     const params = new HttpParams()
-      .set('q',termino)
-      .set('_limit',6);
+      .set('q', termino)
+      .set('_limit', 6);
 
-    return this.http.get<Heroe[]>(`${this.baseUrl}/heroes`,{params});
+    return this.http.get<Heroe[]>(`${this.baseUrl}/heroes`, { params });
+  }
+
+  agregarHeroe(heroe: Heroe): Observable<Heroe> {
+    return this.http.post<Heroe>(`${this.baseUrl}/heroes`, heroe);
+  }
+
+  modificarHeroe(heroe: Heroe): Observable<Heroe> {
+    return this.http.put<Heroe>(`${this.baseUrl}/heroes/${heroe.id}`, heroe);
+  }
+
+  eliminarHeroe(id : string): Observable<any>{
+    return this.http.delete<any>(`${this.baseUrl}/heroes/${id}`);
   }
 
 }

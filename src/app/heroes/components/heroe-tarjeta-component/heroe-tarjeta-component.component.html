@@ -4,7 +4,7 @@
         <mat-card-subtitle></mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image [src]="heroe | imagen">
+    <img mat-card-image [src]="heroe | imagen" loading="lazy">
 
     <mat-card-content>
         <h3>{{heroe.publisher}}</h3>
